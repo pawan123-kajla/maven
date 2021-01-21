@@ -10,10 +10,25 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    goals: 'package'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '$(System.DefulatWorkingDirectory)/**/site/jacoco/jacoco.xml'
+    reportDirectory: ''$(System.DefulatWorkingDirectory)/**/site/jacoco'
+    failIfCoverageEmply: true
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactStagingDirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    ArtifactName: 'war'
+    PathtoPublish: '$(build.artifactStagingDirectory)'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
