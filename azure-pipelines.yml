@@ -20,8 +20,8 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '$(System.DefulatWorkingDirectory)/**/site/jacoco/jacoco.xml'
-    reportDirectory: ''$(System.DefulatWorkingDirectory)/**/site/jacoco' 
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/site/jacoco/jacoco.xml'
+    reportDirectory: ''$(System.DefaultWorkingDirectory)/**/site/jacoco' 
 - task: CopyFiles@2
   inputs:
     Contents: '**/*.war'
