@@ -21,7 +21,7 @@ steps:
   inputs:
     codeCoverageTool: 'JaCoCo'
     summaryFileLocation: '$(System.DefulatWorkingDirectory)/**/site/jacoco/jacoco.xml'
-    reportDirectory: ''$(System.DefulatWorkingDirectory)/**/site/jacoco'
+    reportDirectory: ''$(System.DefulatWorkingDirectory)/**/site/jacoco' 
 - task: CopyFiles@2
   inputs:
     Contents: '**/*.war'
